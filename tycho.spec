@@ -8,7 +8,7 @@
 %define __requires_exclude osgi*
 Name:                tycho
 Version:             1.3.0
-Release:             1
+Release:             2
 Summary:             Plugins and extensions for building Eclipse plugins and OSGI bundles with Maven
 License:             ASL 2.0 and EPL-1.0
 URL:                 http://eclipse.org/tycho
@@ -27,6 +27,7 @@ Patch0:              0001-Bug-537963-Make-the-default-EE-Java-1.8.patch
 Patch1:              0002-Bug-543850-Update-artifactcomparator-asm-dep-to-7.0.patch
 # Port to latest version of Mockito 2.x
 Patch2:              0003-Port-to-latest-versio-of-Mockito.patch
+Patch3:              0004-Implement-a-custom-resolver-for-Tycho-in-local-mode.patch
 # Upstream Eclipse no longer supports non-64bit arches
 ExcludeArch:         s390 %{arm} %{ix86}
 BuildArch:           noarch
@@ -109,6 +110,7 @@ mv fedoraproject-p2-%{fp_p2_git_tag} fedoraproject-p2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %pom_remove_plugin :maven-site-plugin
 %if %{without junit5}
 %pom_disable_module org.eclipse.tycho.surefire.junit5 tycho-surefire
@@ -249,5 +251,8 @@ ln -s %{_javadir}/tycho/org.fedoraproject.p2.jar %{buildroot}%{xmvn_libdir}/inst
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Sat Sep 05 2020 maminjie <maminjie1@huawei.com> - 1.3.0-2
+- support local mode
+
 * Fri Aug 21 2020 maminjie <maminjie1@huawei.com> - 1.3.0-1
 - package init

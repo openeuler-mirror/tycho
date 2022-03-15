@@ -8,7 +8,7 @@
 %define __requires_exclude osgi*
 Name:                tycho
 Version:             1.3.0
-Release:             3
+Release:             4
 Summary:             Plugins and extensions for building Eclipse plugins and OSGI bundles with Maven
 License:             ASL 2.0 and EPL-1.0
 URL:                 http://eclipse.org/tycho
@@ -61,6 +61,7 @@ BuildRequires:       mvn(org.fedoraproject.xmvn:xmvn-install)
 BuildRequires:       mvn(org.fedoraproject.xmvn:xmvn-parent:pom:) mvn(org.hamcrest:hamcrest-core)
 BuildRequires:       mvn(org.mockito:mockito-core) mvn(org.ow2.asm:asm-tree)
 BuildRequires:       mvn(org.ow2.asm:asm-util) mvn(org.slf4j:slf4j-api) mvn(org.slf4j:slf4j-simple)
+BuildRequires:       jetty-servlet jetty-server jetty-security
 %if %{with junit5}
 BuildRequires:       mvn(org.apache.maven.surefire:surefire-junit-platform)
 BuildRequires:       mvn(org.apiguardian:apiguardian-api) mvn(org.opentest4j:opentest4j)
@@ -255,6 +256,9 @@ ln -s %{_javadir}/tycho/org.fedoraproject.p2.jar %{buildroot}%{xmvn_libdir}/inst
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Tue Mar 15 2022 xu_ping <xuping33@huawei.com> - 1.3.0-4
+- fix selfbuild error
+
 * Sun Sep 13 2020 yanan li <liyanan032@huawei.com> - 1.3.0-3
 - fix build fail
 

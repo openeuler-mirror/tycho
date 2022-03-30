@@ -1,5 +1,5 @@
-%bcond_with bootstrap
-%bcond_without junit5
+%bcond_without bootstrap
+%bcond_with junit5
 %global git_tag tycho-%{version}
 %global fp_p2_git_tag 290f67a4c717599b2f5166ea89aa5365571314b1
 %global fp_p2_version 0.0.1
@@ -8,12 +8,13 @@
 %define __requires_exclude osgi*
 Name:                tycho
 Version:             1.3.0
-Release:             4
+Release:             5
 Summary:             Plugins and extensions for building Eclipse plugins and OSGI bundles with Maven
 License:             ASL 2.0 and EPL-1.0
 URL:                 http://eclipse.org/tycho
 Source0:             http://git.eclipse.org/c/tycho/org.eclipse.tycho.git/snapshot/org.eclipse.tycho-%{git_tag}.tar.xz
 Source1:             https://github.com/rgrunber/fedoraproject-p2/archive/%{fp_p2_git_tag}/fedoraproject-p2-%{fp_p2_git_tag}.tar.gz
+Source2:             EmptyMojo.java
 Source3:             tycho-scripts.sh
 Source4:             tycho-bootstrap.sh
 Source5:             tycho-debundle.sh
@@ -127,6 +128,9 @@ find . -name "*.java" | xargs sed -i 's/org.sonatype.aether/org.eclipse.aether/g
 find . -name "*.java" | xargs sed -i 's/org.eclipse.aether.util.DefaultRepositorySystemSession/org.eclipse.aether.DefaultRepositorySystemSession/g'
 sed -i 's/public int getPriority/public float getPriority/g' tycho-core/src/main/java/org/eclipse/tycho/core/p2/P2RepositoryConnectorFactory.java
 mkdir -p tycho-maven-plugin/src/main/java/org/fedoraproject
+pushd tycho-maven-plugin/src/main/java/org/fedoraproject
+cp %{SOURCE2} .
+popd
 sed -i '/^<unit id=.*$/d' tycho-bundles/tycho-bundles-target/tycho-bundles-target.target
 %pom_xpath_remove "pom:dependency[pom:classifier='sources' and pom:artifactId='commons-compress']" tycho-p2/tycho-p2-director-plugin
 for mod in tycho-bundles/org.eclipse.tycho.{p2.{maven.repository.tests,resolver.impl.test,tools.tests},test.utils,core.shared.tests}; do
@@ -152,6 +156,7 @@ for f in usr/lib/eclipse/plugins/org.eclipse.osgi.compatibility.state_*.jar \
 done
 popd
 cp %{SOURCE3} %{SOURCE4} .
+chmod 777 tycho-bootstrap.sh
 ./tycho-bootstrap.sh %{version}
 %else
 sysVer=`grep -C 1 "<artifactId>tycho</artifactId>" %{_mavenpomdir}/tycho/tycho.pom | grep "version" | sed 's/.*>\(.*\)<.*/\1/'`
@@ -258,6 +263,9 @@ ln -s %{_javadir}/tycho/org.fedoraproject.p2.jar %{buildroot}%{xmvn_libdir}/inst
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Wed Jul 13 2022 xiaoqianlv <xiaoqian@nj.iscas.ac.cn> - 1.3.0-5
+- bootstrap build for riscv
+
 * Fri May 06 2022 chenchen <chen_aka_jan@163.com> - 1.3.0-4
 - tweaking the products to use httpclient45 feature
 

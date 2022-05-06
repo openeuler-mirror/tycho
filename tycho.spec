@@ -8,7 +8,7 @@
 %define __requires_exclude osgi*
 Name:                tycho
 Version:             1.3.0
-Release:             3
+Release:             4
 Summary:             Plugins and extensions for building Eclipse plugins and OSGI bundles with Maven
 License:             ASL 2.0 and EPL-1.0
 URL:                 http://eclipse.org/tycho
@@ -30,6 +30,8 @@ Patch2:              0003-Port-to-latest-versio-of-Mockito.patch
 Patch3:              0004-Implement-a-custom-resolver-for-Tycho-in-local-mode.patch
 Patch4:              0005-Fix-build-fail.patch
 Patch5:              0006-Tycho-should-always-delegate-artifact-resolution-to-.patch
+#Patch from: https://git.eclipse.org/c/tycho/org.eclipse.tychogit/commit/?id=43a0e167e39ffaafa5c0e70fbc0ea0b87828f1b3
+Patch6:              tweaking-the-products-to-use-httpclient45-feature.patch
 # Upstream Eclipse no longer supports non-64bit arches
 ExcludeArch:         s390 %{arm} %{ix86}
 BuildArch:           noarch
@@ -115,6 +117,7 @@ mv fedoraproject-p2-%{fp_p2_git_tag} fedoraproject-p2
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 %pom_remove_plugin :maven-site-plugin
 %if %{without junit5}
 %pom_disable_module org.eclipse.tycho.surefire.junit5 tycho-surefire
@@ -255,6 +258,9 @@ ln -s %{_javadir}/tycho/org.fedoraproject.p2.jar %{buildroot}%{xmvn_libdir}/inst
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Fri May 06 2022 chenchen <chen_aka_jan@163.com> - 1.3.0-4
+- tweaking the products to use httpclient45 feature
+
 * Sun Sep 13 2020 yanan li <liyanan032@huawei.com> - 1.3.0-3
 - fix build fail
 

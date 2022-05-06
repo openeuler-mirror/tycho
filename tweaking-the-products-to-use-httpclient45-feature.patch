@@ -1,0 +1,41 @@
+From fc41eb3f0b84a76bcd7e5b17246165f4df02edd6 Mon Sep 17 00:00:00 2001
+From: chen-jan <chen_aka_jan@163.com>
+Date: Fri, 6 May 2022 08:20:09 +0000
+Subject: [PATCH] tweaking the products to use httpclient45 feature
+
+---
+ .../tycho-bundles-external/tycho-bundles-external.product      | 3 +--
+ tycho-bundles/tycho-standalone-p2-director/p2 Director.product | 3 +--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/tycho-bundles/tycho-bundles-external/tycho-bundles-external.product b/tycho-bundles/tycho-bundles-external/tycho-bundles-external.product
+index 182122d..57c1213 100644
+--- a/tycho-bundles/tycho-bundles-external/tycho-bundles-external.product
++++ b/tycho-bundles/tycho-bundles-external/tycho-bundles-external.product
+@@ -37,8 +37,7 @@
+       <plugin id="org.eclipse.ecf.filetransfer"/>
+       <plugin id="org.eclipse.ecf.identity"/>
+       <plugin id="org.eclipse.ecf.provider.filetransfer"/>
+-      <plugin id="org.eclipse.ecf.provider.filetransfer.httpclient4"/>
+-      <plugin id="org.eclipse.ecf.provider.filetransfer.httpclient4.ssl" fragment="true"/>
++      <plugin id="org.eclipse.ecf.provider.filetransfer.httpclient45"/>
+       <plugin id="org.eclipse.ecf.provider.filetransfer.ssl" fragment="true"/>
+       <plugin id="org.eclipse.ecf.ssl" fragment="true"/>
+       <plugin id="org.eclipse.equinox.app"/>
+diff --git a/tycho-bundles/tycho-standalone-p2-director/p2 Director.product b/tycho-bundles/tycho-standalone-p2-director/p2 Director.product
+index 9cf5ed2..78f9b25 100644
+--- a/tycho-bundles/tycho-standalone-p2-director/p2 Director.product	
++++ b/tycho-bundles/tycho-standalone-p2-director/p2 Director.product	
+@@ -37,8 +37,7 @@
+       <plugin id="org.eclipse.ecf.filetransfer"/>
+       <plugin id="org.eclipse.ecf.identity"/>
+       <plugin id="org.eclipse.ecf.provider.filetransfer"/>
+-      <plugin id="org.eclipse.ecf.provider.filetransfer.httpclient4"/>
+-      <plugin id="org.eclipse.ecf.provider.filetransfer.httpclient4.ssl" fragment="true"/>
++      <plugin id="org.eclipse.ecf.provider.filetransfer.httpclient45"/>
+       <plugin id="org.eclipse.ecf.provider.filetransfer.ssl" fragment="true"/>
+       <plugin id="org.eclipse.ecf.ssl" fragment="true"/>
+       <plugin id="org.eclipse.equinox.app"/>
+-- 
+2.30.0
+

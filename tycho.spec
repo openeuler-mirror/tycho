@@ -1,5 +1,5 @@
-%bcond_without bootstrap
-%bcond_with junit5
+%bcond_with bootstrap
+%bcond_without junit5
 %global git_tag tycho-%{version}
 %global fp_p2_git_tag 290f67a4c717599b2f5166ea89aa5365571314b1
 %global fp_p2_version 0.0.1
@@ -8,7 +8,7 @@
 %define __requires_exclude osgi*
 Name:                tycho
 Version:             1.3.0
-Release:             5
+Release:             6
 Summary:             Plugins and extensions for building Eclipse plugins and OSGI bundles with Maven
 License:             ASL 2.0 and EPL-1.0
 URL:                 http://eclipse.org/tycho
@@ -263,6 +263,9 @@ ln -s %{_javadir}/tycho/org.fedoraproject.p2.jar %{buildroot}%{xmvn_libdir}/inst
 %files javadoc -f .mfiles-javadoc
 
 %changelog
+* Wed Jul 13 2022 xiaoqianlv <xiaoqian@nj.iscas.ac.cn> - 1.3.0-6
+- non-bootstrap build for riscv
+
 * Wed Jul 13 2022 xiaoqianlv <xiaoqian@nj.iscas.ac.cn> - 1.3.0-5
 - bootstrap build for riscv
 
